@@ -2,6 +2,8 @@
 
 <a href="/movies">Go back</a>
 
+<% matching_director = Director.find_by(id: @the_movie.director_id) %>
+
 <hr>
 
 <dl>
@@ -20,6 +22,10 @@
   <dt>Image</dt>
     <dd>
     <img src= <%= @the_movie.image %> alt="movie poster"> </dd>
+
+  <dt>Director</dt>
+    <dd><%= matching_director.name %></dd>
+    
 
   <dt>Created at</dt>
     <dd><%= @the_movie.created_at %></dd>

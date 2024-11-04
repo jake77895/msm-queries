@@ -1,6 +1,6 @@
 <h1> Actor #<%= @the_actor.id %> details</h1>
 
-<a href="/movies">Go back</a>
+<a href="/actors">Go back</a>
 
 <hr>
 
@@ -24,3 +24,50 @@
   <dt>Updated at</dt>
     <dd><%= @the_actor.updated_at %></dd>
 </dl>
+
+<% matching_characters = Character.where({ :actor_id => @the_actor.id})%>
+
+
+
+<% matching_movies = [] %> <!-- Define an empty array to collect movies -->
+
+<% matching_characters.each do |character| %>
+  <% movies = Movie.where(id: character.movie_id) %> <!-- Query movies related to each character -->
+  <% matching_movies.concat(movies) %> <!-- Add movies to the array -->
+<% end %>
+
+<%= matching_movies %> 
+
+<table border="1">
+
+  <tr>
+    <th>Title</th>
+    <th>Year</th>
+    <th>Director</th>
+    <th>Character Name</th>
+    <th></th>
+  </tr>
+
+
+<% matching_movies.each do |a_movie|%>
+
+<% matching_director = Director.find_by(id: a_movie.director_id) %>
+
+<% matching_character = matching_characters.find_by(movie_id: a_movie.id) %>
+
+  <tr>
+    <td> <%= a_movie.title %> </td> <!-- Title -->
+    <td> <%= a_movie.year %> </td> <!-- Year -->
+    <td> <%= matching_director.name %></td> <!-- Director -->
+    <td> <%= matching_character.name %> </td> <!-- Character Name -->
+    <td> <a href="/movies/<%=a_movie.id%>">Show details</a></td> <!-- -->
+
+  </tr>
+
+
+<% end %>
+
+
+
+
+</table>

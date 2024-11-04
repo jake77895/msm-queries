@@ -1,5 +1,12 @@
 class MoviesController < ApplicationController
 
+  def index
+    @movies_all = Movie.all
+    
+    render({ :template => "movie_templates/list"})
+  end
+
+
   def show
     the_id = params.fetch("the_id")
 

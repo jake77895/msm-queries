@@ -1,0 +1,33 @@
+<h1> List of Movies </h1>
+
+
+
+<table border="1">
+  <tr>
+    <th>ID</th>
+    <th>Image</th>
+    <th>Title</th>
+    <th>Year</th>
+    <th>Director</th>
+    <th></th>
+  </tr>
+
+  <% @movies_all.each do |a_movie| %>
+   <% matching_director = Director.find_by(id: a_movie.director_id) %> <!-- Find the director for each movie -->
+
+  <tr>
+    <td> <%=a_movie.id%> </td>
+    <td> 
+      <img src="<%=a_movie.image%>" width=250>
+     </td>
+    <td> <%=a_movie.title%> </td>
+    <td> <%=a_movie.year%> </td>
+    <td> <%=matching_director.name %> </td>
+    <td>
+      <a href="/movies/<%=a_movie.id%>">Show details</a>
+    </td>
+  </tr>
+
+  <%end%>
+
+</table>

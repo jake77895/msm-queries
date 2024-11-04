@@ -27,9 +27,37 @@
 
 <hr>
 
-<%= matching_movies = Movie.where({ :director_id => @the_director.id})%>
+
+
+<table border="1">
+
+<% matching_movies = Movie.where({ :director_id => @the_director.id})%>
 
 <% matching_movies.each do |a_movie|%>
-  <li> <%= a_movie.title %> </li>
+
+  <tr>
+    <th>ID</th>
+    <th>Image</th>
+    <th>Title</th>
+    <th>Year</th>
+    <th>Director</th>
+    <th></th>
+  </tr>
+
+  <tr>
+    <td> <%= a_movie.id %> </td> <!-- ID -->
+    <td> <img src = <%= a_movie.image %> width=250> </td> <!-- Image -->
+    <td> <%= a_movie.title %></td> <!-- Title -->
+    <td> <%= a_movie.year %> </td> <!-- Year -->
+    <td> <%= @the_director.name %> </td> <!-- Director -->
+    <td> <a href="/movies/<%=a_movie.id%>">Show details</a></td> <!-- -->
+
+  </tr>
+
 
 <% end %>
+
+
+
+
+</table>
